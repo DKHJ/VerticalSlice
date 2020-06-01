@@ -3,11 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "VerticalSlice/Interactable/BaseInteract.h"
+#include "InteractionInterface.h"
 #include "GameFramework/Character.h"
 #include "VerticalSliceCharacter.generated.h"
 
 UCLASS(config=Game)
-class AVerticalSliceCharacter : public ACharacter
+class AVerticalSliceCharacter : public ACharacter, public IInteractionInterface
 {
 	GENERATED_BODY()
 
@@ -28,6 +30,13 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
+
+	void HandleInteractionInput();
+
+	//// INTERFACE IInteract IMPLEMENTATION ////////////////////
+	virtual void NotifyInInteractRange(AActor* Interactive) override;
+
+	virtual void NotifyLeaveInteractRange(AActor* Interactive) override;
 
 protected:
 
@@ -63,6 +72,7 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
 
+	class ABaseInteract* CurrentInteractive;
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

@@ -11,8 +11,7 @@ class AVerticalSliceGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
-public:
-	AVerticalSliceGameMode();
+
 };
 
 

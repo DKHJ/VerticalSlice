@@ -47,6 +47,41 @@ AVerticalSliceCharacter::AVerticalSliceCharacter()
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
 
+void AVerticalSliceCharacter::HandleInteractionInput()
+{
+	if (IsLocallyControlled() && CurrentInteractive != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Inputted"));
+		CurrentInteractive->StartInteracting(this);
+	}
+}
+
+void AVerticalSliceCharacter::NotifyInInteractRange(AActor * Interactive)
+{
+	if (IsLocallyControlled())
+	{
+		// Keeps the Interactive reference
+		if ((Interactive != nullptr) && (CurrentInteractive == nullptr))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Char In Range"));
+			CurrentInteractive = Cast<ABaseInteract>(Interactive);
+		}
+	}
+}
+
+void AVerticalSliceCharacter::NotifyLeaveInteractRange(AActor * Interactive)
+{
+	if (IsLocallyControlled())
+	{
+		// Release the Interactive reference
+		if (CurrentInteractive != nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Char Out Of Range"));
+			CurrentInteractive = nullptr;
+		}
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
@@ -74,6 +109,8 @@ void AVerticalSliceCharacter::SetupPlayerInputComponent(class UInputComponent* P
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AVerticalSliceCharacter::OnResetVR);
+
+	PlayerInputComponent->BindAction("Interaction", IE_Pressed, this, &AVerticalSliceCharacter::HandleInteractionInput);
 }
 
 

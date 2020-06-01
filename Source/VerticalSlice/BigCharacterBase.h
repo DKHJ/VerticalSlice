@@ -14,4 +14,7 @@ class VERTICALSLICE_API ABigCharacterBase : public AVerticalSliceCharacter
 {
 	GENERATED_BODY()
 	
+
+public:
+
 };
