@@ -50,9 +50,13 @@ ABaseInteract * ABaseInteract::GetConnectedInteractive()
 
 	if (GM == nullptr) return nullptr;
 
+
 	ABaseInteract* interactive = GM->FindInteractiveById(ConnectedInteractiveID);
 
 	return interactive;
+	
+
+	
 }
 
 void ABaseInteract::SendSignalToInteractive()
