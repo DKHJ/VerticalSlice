@@ -10,7 +10,7 @@
 	"DocsURL": "https://forums.unrealengine.com/unreal-engine/marketplace/1482720-modular-snap-system-plugin",
 	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/fa834687594944f5aafe2be8b44ad3f1",
 	"SupportURL": "https://forums.unrealengine.com/unreal-engine/marketplace/1482720-modular-snap-system-plugin",
-	"EngineVersion": "4.24.0",
+	"EngineVersion": "4.25.0",
 	"CanContainContent": false,
 	"Installed": true,
 	"Modules": [
