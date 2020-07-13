@@ -1,7 +1,7 @@
 // Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
 #include "VerticalSliceCharacter.h"
-#include "HeadMountedDisplayFunctionLibrary.h"
+//#include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
@@ -111,16 +111,19 @@ void AVerticalSliceCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	PlayerInputComponent->BindTouch(IE_Released, this, &AVerticalSliceCharacter::TouchStopped);
 
 	// VR headset functionality
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AVerticalSliceCharacter::OnResetVR);
+	//PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AVerticalSliceCharacter::OnResetVR);
 
 	PlayerInputComponent->BindAction("Interaction", IE_Pressed, this, &AVerticalSliceCharacter::HandleInteractionInput);
 }
 
 
+/*
 void AVerticalSliceCharacter::OnResetVR()
 {
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
+*/
+
 
 void AVerticalSliceCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 {

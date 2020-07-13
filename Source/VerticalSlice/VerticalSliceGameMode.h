@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "NetworkMenu/NetworkGameInstance.h"
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "VerticalSliceGameMode.generated.h"
