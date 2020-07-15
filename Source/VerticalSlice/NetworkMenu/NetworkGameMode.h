@@ -12,6 +12,19 @@
 UCLASS()
 class VERTICALSLICE_API ANetworkGameMode : public AGameMode
 {
-	GENERATED_BODY()
-	
+	GENERATED_UCLASS_BODY()
+
+
+UClass* GetDefaultPawnClassForController(AController* InController);
+
+public:
+
+	ANetworkGameMode();
+
+
+
+	//void PostLogin(APlayerController* NewPlayer) override;
+
+private:
+	//uint32 NumberOfPlayers = 0;
 };

@@ -6,12 +6,15 @@
 #include "GameFramework/PlayerController.h"
 #include "NetworkPlayerController.generated.h"
 
-/**
+
  * 
  */
 UCLASS()
 class VERTICALSLICE_API ANetworkPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+
 	
 };
