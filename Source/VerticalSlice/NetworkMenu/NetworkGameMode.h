@@ -12,10 +12,10 @@
 UCLASS()
 class VERTICALSLICE_API ANetworkGameMode : public AGameMode
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
 
 
-UClass* GetDefaultPawnClassForController(AController* InController);
+
 
 public:
 

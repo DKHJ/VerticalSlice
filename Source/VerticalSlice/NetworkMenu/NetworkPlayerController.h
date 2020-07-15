@@ -7,8 +7,6 @@
 #include "NetworkPlayerController.generated.h"
 
 
- * 
- */
 UCLASS()
 class VERTICALSLICE_API ANetworkPlayerController : public APlayerController
 {

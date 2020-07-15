@@ -6,12 +6,8 @@
 
 #include "UObject/ConstructorHelpers.h"
 
-UClass* ANetworkGameMode::GetDefaultPawnClassForController(AController* InController)
-{
-	return nullptr;
-}
 
-ANetworkGameMode::ANetworkGameMode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+ANetworkGameMode::ANetworkGameMode()
 
 {
 	/*
