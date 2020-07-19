@@ -21,10 +21,16 @@ public:
 
 	ANetworkGameMode();
 
+	class ABaseInteract* FindInteractiveById(const FName& ID) const;
 
+protected:
+	virtual void BeginPlay() override;
 
-	//void PostLogin(APlayerController* NewPlayer) override;
+	
 
 private:
-	//uint32 NumberOfPlayers = 0;
+	TArray<class ABaseInteract*> InteractiveInLevelList;
+
+private:
+	void GetInteractivesInLevel();
 };
