@@ -24,6 +24,10 @@ ABaseInteract::ABaseInteract()
 	Collision->OnComponentBeginOverlap.AddDynamic(this, &ABaseInteract::BeginOverlap);
 	Collision->OnComponentEndOverlap.AddDynamic(this, &ABaseInteract::EndOverlap);
 
+
+	//Mark the interactive as replicates
+	SetReplicates(true);
+
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -35,6 +39,8 @@ void ABaseInteract::BeginPlay()
 	Super::BeginPlay();
 
 }
+
+
 
 void ABaseInteract::StartInteracting(APawn * PawnInstigator)
 {

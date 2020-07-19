@@ -15,14 +15,18 @@ class VERTICALSLICE_API AMechanism : public ABaseInteract
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere, Category = "Mechanism")
-		bool isActivated = false;
 
+	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Mechanism")
+	bool bIsActivated = false;
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerDoActivatedAction();
 
 	void DoActivatedAction();
 
+	// Event only implemented on a blueprint
 	UFUNCTION(BlueprintImplementableEvent)
-		void onMechanismActivatedEvent();
+	void onMechanismActivatedEvent();
 
 public:
 	virtual void StartInteracting(APawn* PawnInstigator) override;
