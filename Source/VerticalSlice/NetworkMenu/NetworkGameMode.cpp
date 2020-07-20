@@ -3,8 +3,8 @@
 
 #include "NetworkGameMode.h"
 #include "Kismet/GameplayStatics.h"
-#include "VerticalSlice.h"
-#include "VerticalSliceCharacter.h"
+#include "VerticalSlice/VerticalSlice.h"
+#include "VerticalSlice/VerticalSliceCharacter.h"
 #include "VerticalSlice/Interactable/BaseInteract.h"
 #include "UObject/ConstructorHelpers.h"
 
@@ -23,7 +23,7 @@ ABaseInteract* ANetworkGameMode::FindInteractiveById(const FName& ID) const
 	{
 		if (InteractiveInLevelList[i]->ID == ID)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("[AMainGameMode::FindInteractiveById] Interactive: %s "), *InteractiveInLevelList[i]->GetName());
+			UE_LOG(LogTemp, Warning, TEXT("[ANetworkGameMode::FindInteractiveById] Interactive: %s "), *InteractiveInLevelList[i]->GetName());
 
 			return InteractiveInLevelList[i];
 		}
@@ -48,10 +48,10 @@ void ANetworkGameMode::GetInteractivesInLevel()
 		ABaseInteract* Interactive = Cast<ABaseInteract>(Objects[i]);
 		if (Interactive != nullptr)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("[AMainGameMode::GetInteractivesInRoom] Interactive: %s "), *Interactive->GetName());
+			UE_LOG(LogTemp, Warning, TEXT("[ANetworkGameMode::GetInteractivesInRoom] Interactive: %s "), *Interactive->GetName());
 
 			InteractiveInLevelList.Add(Interactive);
 		}
-		UE_LOG(LogTemp, Warning, TEXT("[AMainGameMode::GetInteractablesInRoom] InteractableList Num: %i "), InteractiveInLevelList.Num());
+		UE_LOG(LogTemp, Warning, TEXT("[ANetworkGameMode::GetInteractablesInRoom] InteractableList Num: %i "), InteractiveInLevelList.Num());
 	}
 }
