@@ -134,7 +134,7 @@ void UNetworkGameInstance::OnCreateSessionComplete(FName SessionName, bool Succe
 	UWorld* World = GetWorld();
 	if (!ensure(World != nullptr)) return;
 
-	World->ServerTravel("/Game/Levels/Spring?listen");
+	World->ServerTravel("/Game/Levels/WinterRevised?listen");
 }
 
 void UNetworkGameInstance::OnDestroySessionComplete(FName SessionName, bool Success)
