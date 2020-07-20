@@ -2,37 +2,56 @@
 
 
 #include "NetworkGameMode.h"
-
-
+#include "Kismet/GameplayStatics.h"
+#include "VerticalSlice/VerticalSlice.h"
+#include "VerticalSlice/VerticalSliceCharacter.h"
+#include "VerticalSlice/Interactable/BaseInteract.h"
 #include "UObject/ConstructorHelpers.h"
 
 
 ANetworkGameMode::ANetworkGameMode()
 
 {
-	/*
-	
-	
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/Blueprints/Characters/BP_BigCharacter"));
 
-	if (PlayerPawnBPClass.Class != NULL)
+}
 
+
+
+ABaseInteract* ANetworkGameMode::FindInteractiveById(const FName& ID) const
+{
+	for (int32 i = 0; i < InteractiveInLevelList.Num(); i++)
 	{
-		DefaultPawnClass = PlayerPawnBPClass.Class;
+		if (InteractiveInLevelList[i]->ID == ID)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("[ANetworkGameMode::FindInteractiveById] Interactive: %s "), *InteractiveInLevelList[i]->GetName());
 
+			return InteractiveInLevelList[i];
+		}
 	}
 
-	
-	*/
-	// set default pawn class to our Blueprinted character
-
+	return nullptr;
 }
 
-/*
-void ANetworkGameMode::PostLogin(APlayerController* NewPlayer)
+void ANetworkGameMode::BeginPlay()
 {
+	Super::BeginPlay();
 
+	GetInteractivesInLevel();
 }
 
-*/
+void ANetworkGameMode::GetInteractivesInLevel()
+{
+	TArray<AActor*> Objects;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ABaseInteract::StaticClass(), Objects);
+	for (int32 i = 0; i < Objects.Num(); i++)
+	{
+		ABaseInteract* Interactive = Cast<ABaseInteract>(Objects[i]);
+		if (Interactive != nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("[ANetworkGameMode::GetInteractivesInRoom] Interactive: %s "), *Interactive->GetName());
 
+			InteractiveInLevelList.Add(Interactive);
+		}
+		UE_LOG(LogTemp, Warning, TEXT("[ANetworkGameMode::GetInteractablesInRoom] InteractableList Num: %i "), InteractiveInLevelList.Num());
+	}
+}
