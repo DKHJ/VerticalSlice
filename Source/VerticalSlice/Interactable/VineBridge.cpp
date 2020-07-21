@@ -16,7 +16,11 @@ void AVineBridge::BeginPlay()
 
 void AVineBridge::OnRep_IsVisibleChanged()
 {
+	onActivatedVineBridgeEvent();
+	
 }
+	
+	
 
 void AVineBridge::DoActivatedAction()
 {
@@ -65,6 +69,8 @@ void AVineBridge::SendSignalToInteractive()
 
 void AVineBridge::ServerDoActivatedAction_Implementation()
 {
+	UE_LOG(LogTemp, Warning, TEXT("[AVineBridge::ServerDoActivatedAction_Implementation]"));
+
 	DoActivatedAction();
 }
 

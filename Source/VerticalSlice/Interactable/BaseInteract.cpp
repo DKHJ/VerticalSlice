@@ -6,6 +6,7 @@
 #include "Components/BoxComponent.h"
 #include "VerticalSlice/BigCharacterBase.h"
 #include "VerticalSlice/VerticalSliceGameMode.h"
+#include "VerticalSlice/NetworkMenu/NetworkGameMode.h"
 
 // Sets default values
 ABaseInteract::ABaseInteract()
@@ -52,7 +53,7 @@ ABaseInteract * ABaseInteract::GetConnectedInteractive()
 	if (ConnectedInteractiveID == "NONE") return nullptr;
 
 	UE_LOG(LogTemp, Warning, TEXT("Not Connected"));
-	AMainGameMode * GM = Cast<AMainGameMode>(GetWorld()->GetAuthGameMode());
+	ANetworkGameMode* GM = Cast<ANetworkGameMode>(GetWorld()->GetAuthGameMode());
 
 	if (GM == nullptr) return nullptr;
 
