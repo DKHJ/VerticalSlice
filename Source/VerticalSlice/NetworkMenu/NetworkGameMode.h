@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NetworkPlayerController.h"
 #include "GameFramework/GameMode.h"
 #include "NetworkGameMode.generated.h"
 
@@ -15,7 +16,9 @@ class VERTICALSLICE_API ANetworkGameMode : public AGameMode
 	GENERATED_BODY()
 
 
+	virtual void PostLogin(APlayerController* NewPlayer) override;
 
+	virtual void RestartPlayer(AController* NewPlayer) override;
 
 public:
 

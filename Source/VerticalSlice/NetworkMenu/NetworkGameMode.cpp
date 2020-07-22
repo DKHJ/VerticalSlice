@@ -9,6 +9,18 @@
 #include "UObject/ConstructorHelpers.h"
 
 
+void ANetworkGameMode::PostLogin(APlayerController* NewPlayer)
+{
+	Super::PostLogin(NewPlayer);
+
+	ANetworkPlayerController* NewPC = Cast<ANetworkPlayerController>(NewPlayer);
+
+}
+
+void ANetworkGameMode::RestartPlayer(AController* NewPlayer)
+{
+}
+
 ANetworkGameMode::ANetworkGameMode()
 
 {

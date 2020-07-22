@@ -23,6 +23,12 @@ class VERTICALSLICE_API IInteractionInterface
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent,Category = "InteractonInterface")
+		bool DoInteraction();
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "InteractonInterface")
+		void InteractionEvent();
+
 	virtual void NotifyInInteractRange(AActor* Interactive) = 0;
 
 	virtual void NotifyLeaveInteractRange(AActor* Interactive) = 0;

@@ -14,20 +14,5 @@ class VERTICALSLICE_API USSBlueprintFunctionLibrary : public UBlueprintFunctionL
 {
 	GENERATED_BODY()
 
-		UFUNCTION(BlueprintCallable, Category = "Viewport")
-		static void DisableSplitScreen(AActor* Context, bool bDisable);
-
-	/**
-	 * Enabled Splitscreen
-	 * @param	bEnable		Whether the viewport should splitscreen between local players or not
-	 */
-	UFUNCTION(BlueprintCallable, Category = "Viewport", meta = (WorldContext = "WorldContextObject"))
-		static void SetEnableSplitscreen(const UObject* WorldContextObject, bool bEnable);
-
-	/**
-	 * Returns the Splitscreen state
-	 * @return	Whether the game viewport is splitscreen or not
-	 */
-	UFUNCTION(BlueprintPure, Category = "Viewport", meta = (WorldContext = "WorldContextObject"))
-		static bool GetEnableSplitscreen(const UObject* WorldContextObject);
+		
 };
