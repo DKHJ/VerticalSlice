@@ -3,3 +3,6 @@
 
 #include "NetworkPlayerState.h"
 
+void ANetworkPlayerState::ClientInitialize(AController * InController)
+{
+}
