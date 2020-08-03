@@ -13,5 +13,7 @@ UCLASS()
 class VERTICALSLICE_API ANetworkPlayerState : public APlayerState
 {
 	GENERATED_BODY()
-	
+
+
+	virtual void ClientInitialize(class AController* InController) override;
 };
