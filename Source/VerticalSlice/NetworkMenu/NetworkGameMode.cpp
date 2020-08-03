@@ -8,17 +8,8 @@
 #include "VerticalSlice/Interactable/BaseInteract.h"
 #include "UObject/ConstructorHelpers.h"
 
-ANetworkGameMode::ANetworkGameMode(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
-{
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnOb(TEXT("/Game/Blueprints/Characters/BP_BigCharacter"));
-	DefaultPawnClass = PlayerPawnOb.Class;
 
-	static ConstructorHelpers::FClassFinder<APawn> SmallCharOb(TEXT("/Game/Blueprints/Characters/BP_SmallCharacter"));
-	SmallCharClass = SmallCharOb.Class;
-
-	PlayerControllerClass = ANetworkPlayerController::StaticClass();
-
-}
+/*
 void ANetworkGameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
@@ -29,7 +20,10 @@ void ANetworkGameMode::PostLogin(APlayerController* NewPlayer)
 		//NewPC->Spawn
 	}
 }
+*/
 
+
+/*
 void ANetworkGameMode::RestartPlayer(AController* NewPlayer)
 {
 	Super::RestartPlayer(NewPlayer);
@@ -41,31 +35,15 @@ void ANetworkGameMode::RestartPlayer(AController* NewPlayer)
 		AVerticalSliceCharacter*Character = Cast<AVerticalSliceCharacter>(PC->GetCharacter());
 		if (Character)
 		{
-			
+
 		}
 	}
 }
 
-AActor * ANetworkGameMode::ChoosePlayerStart_Implementation(AController * Player)
-{
-	return nullptr;
-}
 
-bool ANetworkGameMode::ShouldSpawnAtStartSpot(AController * Player)
-{
-	return false;
-}
+*/
 
-UClass * ANetworkGameMode::GetDefaultPawnClassForController_Implementation(AController * InController)
-{
-	return nullptr;
-}
 
-ANetworkGameMode::ANetworkGameMode()
-
-{
-
-}
 
 
 
@@ -91,15 +69,8 @@ void ANetworkGameMode::BeginPlay()
 	GetInteractivesInLevel();
 }
 
-bool ANetworkGameMode::IsSpawnpointAllowed(APlayerStart * SpawnPoint, AController * Player) const
-{
-	return false;
-}
 
-bool ANetworkGameMode::IsSpawnpointPreferred(APlayerStart * SpawnPoint, AController * Player) const
-{
-	return false;
-}
+
 
 void ANetworkGameMode::GetInteractivesInLevel()
 {

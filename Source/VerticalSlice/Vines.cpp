@@ -3,10 +3,11 @@
 
 #include "Vines.h"
 
+/*
 // Sets default values
 AVines::AVines()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
@@ -23,6 +24,7 @@ void AVines::BeginPlay()
 
 void AVines::OnRep_IsVisibleChanged()
 {
+
 }
 
 // Called every frame
@@ -31,4 +33,7 @@ void AVines::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+
+*/
 

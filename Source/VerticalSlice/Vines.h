@@ -11,21 +11,23 @@ class VERTICALSLICE_API AVines : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
+		/*
+		public:	
 	// Sets default values for this actor's properties
 	AVines();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	UPROPERTY(ReplicatedUsing = OnRep_IsVisibleChanged, EditDefaultsOnly, Category = "Vine")
-		bool isVisible = false;
-
-	UFUNCTION()
-	void OnRep_IsVisibleChanged();
-
-public:	
+	/*
+	public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	*/
+
+
+
+
+		
 
 };
