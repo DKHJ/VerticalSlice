@@ -35,6 +35,8 @@ public:
 
 	class ABaseInteract* FindInteractiveById(const FName& ID) const;
 
+	void CompletedLevel(APawn* InsitgatorPawn, bool bSuccess);
+
 protected:
 
 	//virtual AActor* ChoosePlayerStart_Implementation(AController* Player) override;

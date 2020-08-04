@@ -15,4 +15,12 @@ class VERTICALSLICE_API ANetworkPlayerController : public APlayerController
 public:
 
 	
+
+
+
+public:
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Player Controller")
+	void OnLevelComplete(APawn* InstigatorPawn);
+
 };

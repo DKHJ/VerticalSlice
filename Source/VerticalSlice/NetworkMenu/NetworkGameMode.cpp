@@ -6,6 +6,8 @@
 #include "VerticalSlice/VerticalSlice.h"
 #include "VerticalSlice/VerticalSliceCharacter.h"
 #include "VerticalSlice/Interactable/BaseInteract.h"
+#include "VerticalSlice/NetworkGameState.h"
+#include "NetworkPlayerController.h"
 #include "UObject/ConstructorHelpers.h"
 
 
@@ -60,6 +62,18 @@ ABaseInteract* ANetworkGameMode::FindInteractiveById(const FName& ID) const
 	}
 
 	return nullptr;
+}
+
+void ANetworkGameMode::CompletedLevel(APawn* InsitgatorPawn, bool bSuccess)
+{
+	if (InsitgatorPawn == nullptr) return;
+
+	ANetworkGameState* GameState = GetGameState<ANetworkGameState>();
+
+	if (GameState != nullptr)
+	{
+		GameState->MulticastOnLevelCompleted(InsitgatorPawn);
+	}
 }
 
 void ANetworkGameMode::BeginPlay()

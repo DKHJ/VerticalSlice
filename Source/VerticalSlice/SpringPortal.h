@@ -40,4 +40,6 @@ public:
 
 private:
 
+	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
+	int32 PlayerCount;
 };
