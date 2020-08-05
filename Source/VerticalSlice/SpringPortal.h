@@ -24,15 +24,20 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SpringPortal", meta = (AllowPrivateAccess = "true"))
 		class UBoxComponent* Collision;
 
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
+	void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 UFUNCTION()
 void HandleOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-UFUNCTION(BlueprintCallable, Category = "SpringPortal")
-void TravelToSpring();
+
+
+
 
 public:	
 	// Called every frame
@@ -41,5 +46,21 @@ public:
 private:
 
 	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
-	int32 PlayerCount;
+		bool ToSpringLevel;
+
+	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
+		bool ToWinterLevel;
+
+	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
+		bool ToSummerLevel;
+
+	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
+		bool ToAutumnLevel;
+
+	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
+		bool BigCharacterPresent;
+
+	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
+		bool SmallCharacterPresent;
+
 };

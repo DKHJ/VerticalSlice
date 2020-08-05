@@ -8,43 +8,30 @@
 #include "VerticalSlice/Interactable/BaseInteract.h"
 #include "VerticalSlice/NetworkGameState.h"
 #include "NetworkPlayerController.h"
+#include "NetworkPlayerState.h"
+#include "VerticalSlice/NetworkPlayerStart.h"
 #include "UObject/ConstructorHelpers.h"
 
 
-/*
-void ANetworkGameMode::PostLogin(APlayerController* NewPlayer)
+
+void ANetworkGameMode::PostLogin(APlayerController * NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
 
-	ANetworkPlayerController* NewPC = Cast<ANetworkPlayerController>(NewPlayer);
-	if (NewPC && NewPC->GetPawn() == NULL)
-	{
-		//NewPC->Spawn
-	}
+	
 }
-*/
 
 
-/*
-void ANetworkGameMode::RestartPlayer(AController* NewPlayer)
+
+ANetworkGameMode::ANetworkGameMode()
 {
-	Super::RestartPlayer(NewPlayer);
 
-	ANetworkPlayerController* PC = Cast<ANetworkPlayerController>(NewPlayer);
+	PlayerControllerClass = ANetworkPlayerController::StaticClass();
 
-	if (PC)
-	{
-		AVerticalSliceCharacter*Character = Cast<AVerticalSliceCharacter>(PC->GetCharacter());
-		if (Character)
-		{
+	GameStateClass = ANetworkGameState::StaticClass();
 
-		}
-	}
+	PlayerStateClass = ANetworkPlayerState::StaticClass();
 }
-
-
-*/
-
 
 
 
@@ -64,15 +51,21 @@ ABaseInteract* ANetworkGameMode::FindInteractiveById(const FName& ID) const
 	return nullptr;
 }
 
-void ANetworkGameMode::CompletedLevel(APawn* InsitgatorPawn, bool bSuccess)
+//This code only runs on the server, there is no instance of the game mode on the client, only on the server
+void ANetworkGameMode::CompletedLevel(APawn* InstigatorPawn, bool bSuccess)
 {
-	if (InsitgatorPawn == nullptr) return;
+	if (InstigatorPawn == nullptr) return;
 
-	ANetworkGameState* GameState = GetGameState<ANetworkGameState>();
 
-	if (GameState != nullptr)
+	//Call the portal to change the state of the game and let everyone know the new state
+	//we can get the game state from the game mode
+	ANetworkGameState* gameState = GetGameState<ANetworkGameState>();
+
+	if (gameState != nullptr)
 	{
-		GameState->MulticastOnLevelCompleted(InsitgatorPawn);
+		//Call Multicast
+		//gameState->MulticastOnLevelCompleted(InstigatorPawn);
+		gameState->ServerOnLevelCompleted(InstigatorPawn);
 	}
 }
 
@@ -88,6 +81,7 @@ void ANetworkGameMode::BeginPlay()
 
 void ANetworkGameMode::GetInteractivesInLevel()
 {
+	//Find all objects of basic interactive type
 	TArray<AActor*> Objects;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ABaseInteract::StaticClass(), Objects);
 	for (int32 i = 0; i < Objects.Num(); i++)

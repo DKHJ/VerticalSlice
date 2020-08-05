@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/SceneComponent.h"
 #include "BaseInteract.generated.h"
 
 UCLASS()
@@ -25,6 +26,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interactive", meta = (AllowPrivateAccess = "true"))
 		class UBoxComponent* Collision;
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

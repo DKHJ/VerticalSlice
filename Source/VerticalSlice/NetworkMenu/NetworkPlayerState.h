@@ -14,6 +14,10 @@ class VERTICALSLICE_API ANetworkPlayerState : public APlayerState
 {
 	GENERATED_BODY()
 
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,Replicated, Category = "Player State")
+	int32 PlayerNumber;
 
 	virtual void ClientInitialize(class AController* InController) override;
 };

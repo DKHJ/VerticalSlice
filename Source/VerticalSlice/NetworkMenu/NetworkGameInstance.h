@@ -56,4 +56,19 @@ private:
 
 	FString DesiredServerName;
 	void CreateSession();
+
+
+	protected:
+	//Booleans for checking if levels have been completed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool bIsSpringCompleted;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool bIsSummerCompleted;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool bIsWinterCompleted;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool bIsAutumnCompleted;
 };

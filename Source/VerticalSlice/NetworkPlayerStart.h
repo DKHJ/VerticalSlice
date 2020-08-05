@@ -16,7 +16,8 @@ class VERTICALSLICE_API ANetworkPlayerStart : public APlayerStart
 	
 
 public:
-	
+	UPROPERTY(EditAnywhere, Category = "Defaults")
+		bool bForBigCharacter;
 
 
 };

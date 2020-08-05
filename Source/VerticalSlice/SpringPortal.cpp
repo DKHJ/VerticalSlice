@@ -2,6 +2,7 @@
 
 
 #include "SpringPortal.h"
+#include "Components/BoxComponent.h"
 #include "NetworkMenu/NetworkGameMode.h"
 #include "NetworkMenu/NetworkPlayerController.h"
 #include "VerticalSliceCharacter.h"
@@ -10,10 +11,18 @@
 // Sets default values
 ASpringPortal::ASpringPortal()
 {
+	RootScene = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = RootScene;
+
+	Collision = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
+	Collision->SetupAttachment(RootComponent);
+	Collision->OnComponentBeginOverlap.AddDynamic(this, &ASpringPortal::HandleOverlap);
+	Collision->OnComponentEndOverlap.AddDynamic(this, &ASpringPortal::OnOverlapEnd);
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	PlayerCount = 0;
+	BigCharacterPresent = false;
+	SmallCharacterPresent = false;
 }
 
 // Called when the game starts or when spawned
@@ -21,6 +30,27 @@ void ASpringPortal::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+
+void ASpringPortal::OnOverlapEnd(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex)
+{
+	AVerticalSliceCharacter* Pawn = Cast<AVerticalSliceCharacter>(OtherActor);
+
+	if (Pawn == nullptr)
+	{
+		return;
+	}
+
+	if (OtherActor->ActorHasTag("BigCharacter") == true)
+	{
+		BigCharacterPresent = false;
+	}
+
+	if (OtherActor->ActorHasTag("SmallCharacter") == true)
+	{
+		SmallCharacterPresent = false;
+	}
 }
 
 void ASpringPortal::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -32,9 +62,17 @@ void ASpringPortal::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		return;
 	}
 
-	PlayerCount++;
+	if (OtherActor->ActorHasTag("BigCharacter") == true)
+	{
+		BigCharacterPresent = true;
+	}
 
-	if (PlayerCount >= 2)
+	if (OtherActor->ActorHasTag("SmallCharacter") == true)
+	{
+		SmallCharacterPresent = true;
+	}
+
+	if (SmallCharacterPresent && BigCharacterPresent == true)
 	{
 		UWorld* World = GetWorld();
 		if (World == nullptr)
@@ -52,7 +90,9 @@ void ASpringPortal::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 		if (GameMode != nullptr)
 		{
+			
 			GameMode->CompletedLevel(Pawn, true);
+			
 		}
 	}
 }
@@ -62,11 +102,18 @@ void ASpringPortal::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME(ASpringPortal, PlayerCount);
+	DOREPLIFETIME(ASpringPortal, BigCharacterPresent);
+	DOREPLIFETIME(ASpringPortal, SmallCharacterPresent);
+	DOREPLIFETIME(ASpringPortal, ToSpringLevel);
+	DOREPLIFETIME(ASpringPortal, ToSummerLevel);
+	DOREPLIFETIME(ASpringPortal, ToWinterLevel);
+	DOREPLIFETIME(ASpringPortal, ToAutumnLevel);
+
+
 }
-void ASpringPortal::TravelToSpring()
-{
-}
+
+
+
 
 // Called every frame
 void ASpringPortal::Tick(float DeltaTime)
