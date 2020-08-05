@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class VERTICALSLICE_API AVineBridge : public ABaseInteract
+class VERTICALSLICE_API AVineBridge : public AActor
 {
 	GENERATED_BODY()
 	
@@ -25,24 +25,7 @@ protected:
 
 protected:
 
-	UPROPERTY(ReplicatedUsing = OnRep_IsVisibleChanged, EditDefaultsOnly, Category = "VineBridge")
-		bool bIsVisible = false;
-
-	UFUNCTION()
-	void OnRep_IsVisibleChanged();
-
-	UFUNCTION(Server, Reliable, WithValidation)
-		void ServerDoActivatedAction();
-
-
-	void DoActivatedAction();
-
-
-	UFUNCTION(BlueprintImplementableEvent)
-		void onActivatedVineBridgeEvent();
 
 public:
-	virtual void StartInteracting(APawn* PawnInstigator) override;
 
-	virtual void SendSignalToInteractive() override;
 };

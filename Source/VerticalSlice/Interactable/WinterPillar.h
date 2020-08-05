@@ -33,7 +33,6 @@ protected:
 		void onActivatedWinterPillarEvent();
 
 public:
-	virtual void StartInteracting(APawn* PawnInstigator) override;
-
-	virtual void SendSignalToInteractive() override;
+	//virtual void StartInteracting(APawn* PawnInstigator) override;
+	//virtual void SendSignalToInteractive() override;
 };

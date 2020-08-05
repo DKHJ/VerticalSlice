@@ -29,6 +29,6 @@ protected:
 	void onMechanismActivatedEvent();
 
 public:
-	virtual void StartInteracting(APawn* PawnInstigator) override;
+	//virtual void StartInteracting(APawn* PawnInstigator) override;
 	
 };

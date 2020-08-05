@@ -6,6 +6,7 @@
 #include "VerticalSlice/Interactable/BaseInteract.h"
 #include "InteractionInterface.h"
 #include "GameFramework/Character.h"
+#include "Interactable/BaseInteract.h"
 #include "VerticalSliceCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -22,7 +23,6 @@ class AVerticalSliceCharacter : public ACharacter, public IInteractionInterface
 	class UCameraComponent* FollowCamera;
 
 
-
 public:
 	AVerticalSliceCharacter();
 
@@ -34,13 +34,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
-
 	void HandleInteractionInput();
 
-	//// INTERFACE IInteract IMPLEMENTATION ////////////////////
-	virtual void NotifyInInteractRange(AActor* Interactive) override;
-
-	virtual void NotifyLeaveInteractRange(AActor* Interactive) override;
+	class ABaseInteract* CurrentInteractActorReference;
+	class IInteractionInterface* CurrentInteractInterface;
 
 protected:
 
@@ -71,15 +68,18 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	virtual void DoInteract();
 
+	virtual void Interact_Implementation();
 
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
 
+	
 
-	class ABaseInteract* CurrentInteractive;
+
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

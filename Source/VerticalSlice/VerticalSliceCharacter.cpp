@@ -49,41 +49,40 @@ AVerticalSliceCharacter::AVerticalSliceCharacter()
 }
 
 
+//void AVerticalSliceCharacter::HandleInteractionInput()
+//{
+//	if (IsLocallyControlled() && CurrentInteractive != nullptr)
+//	{
+//		UE_LOG(LogTemp, Warning, TEXT("Inputted"));
+//		CurrentInteractive->StartInteracting(this);
+//	}
+//}
 
-void AVerticalSliceCharacter::HandleInteractionInput()
-{
-	if (IsLocallyControlled() && CurrentInteractive != nullptr)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Inputted"));
-		CurrentInteractive->StartInteracting(this);
-	}
-}
+//void AVerticalSliceCharacter::NotifyInInteractRange(AActor * Interactive)
+//{
+//	if (IsLocallyControlled())
+//	{
+//		// Keeps the Interactive reference
+//		if ((Interactive != nullptr) && (CurrentInteractive == nullptr))
+//		{
+//			UE_LOG(LogTemp, Warning, TEXT("Char In Range"));
+//			CurrentInteractive = Cast<ABaseInteract>(Interactive);
+//		}
+//	}
+//}
 
-void AVerticalSliceCharacter::NotifyInInteractRange(AActor * Interactive)
-{
-	if (IsLocallyControlled())
-	{
-		// Keeps the Interactive reference
-		if ((Interactive != nullptr) && (CurrentInteractive == nullptr))
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Char In Range"));
-			CurrentInteractive = Cast<ABaseInteract>(Interactive);
-		}
-	}
-}
-
-void AVerticalSliceCharacter::NotifyLeaveInteractRange(AActor * Interactive)
-{
-	if (IsLocallyControlled())
-	{
-		// Release the Interactive reference
-		if (CurrentInteractive != nullptr)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Char Out Of Range"));
-			CurrentInteractive = nullptr;
-		}
-	}
-}
+//void AVerticalSliceCharacter::NotifyLeaveInteractRange(AActor * Interactive)
+//{
+//	if (IsLocallyControlled())
+//	{
+//		// Release the Interactive reference
+//		if (CurrentInteractive != nullptr)
+//		{
+//			UE_LOG(LogTemp, Warning, TEXT("Char Out Of Range"));
+//			CurrentInteractive = nullptr;
+//		}
+//	}
+//}
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -110,20 +109,9 @@ void AVerticalSliceCharacter::SetupPlayerInputComponent(class UInputComponent* P
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &AVerticalSliceCharacter::TouchStarted);
 	PlayerInputComponent->BindTouch(IE_Released, this, &AVerticalSliceCharacter::TouchStopped);
 
-	// VR headset functionality
-	//PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AVerticalSliceCharacter::OnResetVR);
-
-	PlayerInputComponent->BindAction("Interaction", IE_Pressed, this, &AVerticalSliceCharacter::HandleInteractionInput);
+	// Interact Key Pressed
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AVerticalSliceCharacter::DoInteract);
 }
-
-
-/*
-void AVerticalSliceCharacter::OnResetVR()
-{
-	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
-}
-*/
-
 
 void AVerticalSliceCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 {
@@ -134,6 +122,17 @@ void AVerticalSliceCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVecto
 {
 		StopJumping();
 }
+
+void AVerticalSliceCharacter::DoInteract()
+{
+
+}
+
+void AVerticalSliceCharacter::Interact_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("C++ Called [BC] Interact_Implementation!"));
+}
+
 
 void AVerticalSliceCharacter::TurnAtRate(float Rate)
 {
