@@ -14,17 +14,28 @@ class VERTICALSLICE_API ANetworkGameState : public AGameState
 {
 	GENERATED_BODY()
 
-		
 public:
 
-	//This runs on server and client
-	UFUNCTION(NetMulticast, Reliable)
-	void MulticastOnLevelCompleted(APawn* InstigatorPawn);
 
 	UFUNCTION(Server, Reliable)
-	void ServerOnLevelCompleted(APawn* InstigatorPawn);
+	void ServerTravelToSpring(APawn* InstigatorPawn);
+
+	UFUNCTION(Server, Reliable)
+	void ServerTravelToAutumn(APawn* InstigatorPawn);
+
+	UFUNCTION(Server, Reliable)
+	void ServerTravelToWinter(APawn* InstigatorPawn);
+
+	UFUNCTION(Server, Reliable)
+	void ServerTravelToSummer(APawn* InstigatorPawn);
+
+	UFUNCTION(Server, Reliable)
+	void ServerBackToHubWorld(APawn* InstigatorPawn);
+
 
 protected:
+
+
 
 	//Bools for specific levels, do not need to be persistent, in game state.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

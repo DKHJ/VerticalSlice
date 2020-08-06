@@ -43,8 +43,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-private:
-
 	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
 		bool ToSpringLevel;
 
@@ -58,9 +56,16 @@ private:
 		bool ToAutumnLevel;
 
 	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
+		bool ToHubWorld;
+
+	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
 		bool BigCharacterPresent;
 
 	UPROPERTY(Replicated, EditDefaultsOnly, Category = "Portal")
 		bool SmallCharacterPresent;
 
+
+private:
+
+	
 };

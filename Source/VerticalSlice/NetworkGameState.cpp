@@ -5,38 +5,78 @@
 #include "NetworkMenu/NetworkPlayerController.h"
 
 
-
-void ANetworkGameState::MulticastOnLevelCompleted_Implementation(APawn* InstigatorPawn)
+void ANetworkGameState::ServerTravelToSpring_Implementation(APawn* InstigatorPawn)
 {
-	
 	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; It++)
 	{
 		ANetworkPlayerController* PC = Cast<ANetworkPlayerController>(It->Get());
 
 		if (PC && PC->IsLocalController())
+
 		{
-			PC->OnLevelComplete(InstigatorPawn);
-		
+			PC->TravelToSpringLevel(InstigatorPawn);
 		}
+
 	}
 }
 
-void ANetworkGameState::ServerOnLevelCompleted_Implementation(APawn * InstigatorPawn)
+void ANetworkGameState::ServerTravelToAutumn_Implementation(APawn* InstigatorPawn)
 {
-	UWorld* MyWorld = GetWorld();
-	
 	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; It++)
 	{
 		ANetworkPlayerController* PC = Cast<ANetworkPlayerController>(It->Get());
 
 		if (PC && PC->IsLocalController())
+
 		{
-			if (MyWorld->GetMapName() == "SpringRevised" || "SummerRevised" || "WinterRevised" || "AutumnRevised")
-			{
-				PC->TravelBackToHubWorld(InstigatorPawn);
-			}
-			
-			
+			PC->TravelToAutumnLevel(InstigatorPawn);
 		}
+
 	}
 }
+
+void ANetworkGameState::ServerTravelToWinter_Implementation(APawn* InstigatorPawn)
+{
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; It++)
+	{
+		ANetworkPlayerController* PC = Cast<ANetworkPlayerController>(It->Get());
+
+		if (PC && PC->IsLocalController())
+
+		{
+			PC->TravelToWinterLevel(InstigatorPawn);
+		}
+
+	}
+}
+
+void ANetworkGameState::ServerTravelToSummer_Implementation(APawn* InstigatorPawn)
+{
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; It++)
+	{
+		ANetworkPlayerController* PC = Cast<ANetworkPlayerController>(It->Get());
+
+		if (PC && PC->IsLocalController())
+
+		{
+			PC->TravelToSummerLevel(InstigatorPawn);
+		}
+
+	}
+}
+
+void ANetworkGameState::ServerBackToHubWorld_Implementation(APawn* InstigatorPawn)
+{
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; It++)
+	{
+		ANetworkPlayerController* PC = Cast<ANetworkPlayerController>(It->Get());
+
+		if (PC && PC->IsLocalController())
+
+		{
+			PC->TravelBackToHubWorld(InstigatorPawn);
+		}
+
+	}
+}
+

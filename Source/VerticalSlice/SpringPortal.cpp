@@ -90,9 +90,29 @@ void ASpringPortal::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 		if (GameMode != nullptr)
 		{
-			
-			GameMode->CompletedLevel(Pawn, true);
-			
+			if (ToSpringLevel == true)
+			{
+				GameMode->GoToSpringLevel(Pawn, true);
+
+			}
+			else if (ToAutumnLevel == true)
+			{
+				GameMode->GoToAutumnLevel(Pawn, true);
+			}
+			else if (ToSummerLevel == true)
+			{
+				GameMode->GoToSummerLevel(Pawn, true);
+			}
+			else if (ToWinterLevel == true)
+			{
+				GameMode->GoToWinterLevel(Pawn, true);
+			}
+
+			else if (ToHubWorld == true)
+			{
+				GameMode->GoToHubWorld(Pawn, true);
+			}
+		
 		}
 	}
 }
@@ -108,6 +128,7 @@ void ASpringPortal::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	DOREPLIFETIME(ASpringPortal, ToSummerLevel);
 	DOREPLIFETIME(ASpringPortal, ToWinterLevel);
 	DOREPLIFETIME(ASpringPortal, ToAutumnLevel);
+	DOREPLIFETIME(ASpringPortal, ToHubWorld);
 
 
 }

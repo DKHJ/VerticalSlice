@@ -1,13 +1,33 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "Components/BoxComponent.h" 
 #include "CrystalShard.h"
 
 // Sets default values
 ACrystalShard::ACrystalShard()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+
+	RootScene = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = RootScene;
+
+	// Mesh
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainMesh"));
+	Mesh->SetupAttachment(RootComponent);
+
+	Collision = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
+	Collision->SetupAttachment(RootComponent);
+
+	// Dynamic events
+	Collision->OnComponentBeginOverlap.AddDynamic(this, &ACrystalShard::BeginOverlap);
+	
+
+
+	//Mark the interactive as replicates
+	SetReplicates(true);
+
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+ 	
 
 }
 

@@ -29,6 +29,7 @@ protected:
 
 	class AVerticalSliceCharacter* myCharacter;
 
+
 public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Player Controller")
@@ -37,4 +38,15 @@ public:
 	UFUNCTION()
 	void TravelBackToHubWorld(APawn* InstigatorPawn);
 
+	UFUNCTION()
+	void TravelToSpringLevel(APawn* InstigatorPawn);
+
+	UFUNCTION()
+	void TravelToAutumnLevel(APawn* InstigatorPawn);
+
+	UFUNCTION()
+	void TravelToWinterLevel(APawn* InstigatorPawn);
+	
+	UFUNCTION()
+	void TravelToSummerLevel(APawn* InstigatorPawn);
 };

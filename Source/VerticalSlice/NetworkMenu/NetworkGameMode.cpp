@@ -52,7 +52,24 @@ ABaseInteract* ANetworkGameMode::FindInteractiveById(const FName& ID) const
 }
 
 //This code only runs on the server, there is no instance of the game mode on the client, only on the server
-void ANetworkGameMode::CompletedLevel(APawn* InstigatorPawn, bool bSuccess)
+void ANetworkGameMode::GoToSpringLevel(APawn* InstigatorPawn, bool bSuccess)
+{
+
+	if (InstigatorPawn == nullptr) return;
+
+
+	//Call the portal to change the state of the game and let everyone know the new state
+	//we can get the game state from the game mode
+	ANetworkGameState* gameState = GetGameState<ANetworkGameState>();
+
+	if (gameState != nullptr)
+	{
+		gameState->ServerTravelToSpring(InstigatorPawn);
+	}
+
+}
+//This code only runs on the server, there is no instance of the game mode on the client, only on the server
+void ANetworkGameMode::GoToAutumnLevel(APawn* InstigatorPawn, bool bSuccess)
 {
 	if (InstigatorPawn == nullptr) return;
 
@@ -63,9 +80,55 @@ void ANetworkGameMode::CompletedLevel(APawn* InstigatorPawn, bool bSuccess)
 
 	if (gameState != nullptr)
 	{
-		//Call Multicast
-		//gameState->MulticastOnLevelCompleted(InstigatorPawn);
-		gameState->ServerOnLevelCompleted(InstigatorPawn);
+		gameState->ServerTravelToAutumn(InstigatorPawn);
+	}
+
+}
+//This code only runs on the server, there is no instance of the game mode on the client, only on the server
+void ANetworkGameMode::GoToWinterLevel(APawn* InstigatorPawn, bool bSuccess)
+{
+	if (InstigatorPawn == nullptr) return;
+
+
+	//Call the portal to change the state of the game and let everyone know the new state
+	//we can get the game state from the game mode
+	ANetworkGameState* gameState = GetGameState<ANetworkGameState>();
+
+	if (gameState != nullptr)
+	{
+		gameState->ServerTravelToWinter(InstigatorPawn);
+	}
+
+}
+//This code only runs on the server, there is no instance of the game mode on the client, only on the server
+void ANetworkGameMode::GoToSummerLevel(APawn* InstigatorPawn, bool bSuccess)
+{
+	if (InstigatorPawn == nullptr) return;
+
+
+	//Call the portal to change the state of the game and let everyone know the new state
+	//we can get the game state from the game mode
+	ANetworkGameState* gameState = GetGameState<ANetworkGameState>();
+
+	if (gameState != nullptr)
+	{
+		gameState->ServerTravelToSummer(InstigatorPawn);
+	}
+
+}
+
+void ANetworkGameMode::GoToHubWorld(APawn* InstigatorPawn, bool bSuccess)
+{
+	if (InstigatorPawn == nullptr) return;
+
+
+	//Call the portal to change the state of the game and let everyone know the new state
+	//we can get the game state from the game mode
+	ANetworkGameState* gameState = GetGameState<ANetworkGameState>();
+
+	if (gameState != nullptr)
+	{
+		gameState->ServerBackToHubWorld(InstigatorPawn);
 	}
 }
 
@@ -75,8 +138,6 @@ void ANetworkGameMode::BeginPlay()
 
 	GetInteractivesInLevel();
 }
-
-
 
 
 void ANetworkGameMode::GetInteractivesInLevel()

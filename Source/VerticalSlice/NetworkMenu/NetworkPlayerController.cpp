@@ -34,3 +34,35 @@ void ANetworkPlayerController::TravelBackToHubWorld(APawn * InstigatorPawn)
 
 	World->ServerTravel("/Game/Levels/HubWorld?listen");
 }
+
+void ANetworkPlayerController::TravelToSpringLevel(APawn* InstigatorPawn)
+{
+	UWorld* World = GetWorld();
+	if (!ensure(World != nullptr)) return;
+
+	World->ServerTravel("/Game/Levels/SpringRevised?listen");
+}
+
+void ANetworkPlayerController::TravelToAutumnLevel(APawn* InstigatorPawn)
+{
+	UWorld* World = GetWorld();
+	if (!ensure(World != nullptr)) return;
+
+	World->ServerTravel("/Game/Levels/AutumnRevised?listen");
+}
+
+void ANetworkPlayerController::TravelToWinterLevel(APawn* InstigatorPawn)
+{
+	UWorld* World = GetWorld();
+	if (!ensure(World != nullptr)) return;
+
+	World->ServerTravel("/Game/Levels/WinterRevised?listen");
+}
+
+void ANetworkPlayerController::TravelToSummerLevel(APawn* InstigatorPawn)
+{
+	UWorld* World = GetWorld();
+	if (!ensure(World != nullptr)) return;
+
+	World->ServerTravel("/Game/Levels/WinterRevised?listen");
+}

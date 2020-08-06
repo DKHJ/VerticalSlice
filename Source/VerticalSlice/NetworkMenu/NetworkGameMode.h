@@ -22,13 +22,20 @@ public:
 
 	class ABaseInteract* FindInteractiveById(const FName& ID) const;
 
-	void CompletedLevel(APawn* InstigatorPawn, bool bSuccess);
+
 	
-	
+	void GoToSpringLevel(APawn* InstigatorPawn, bool bSuccess);
+
+	void GoToAutumnLevel(APawn* InstigatorPawn, bool bSuccess);
+
+	void GoToWinterLevel(APawn* InstigatorPawn, bool bSuccess);
+
+	void GoToSummerLevel(APawn* InstigatorPawn, bool bSuccess);
+
+	void GoToHubWorld(APawn* InstigatorPawn, bool bSuccess);
+
 
 protected:
-
-	
 
 	virtual void BeginPlay() override;
 
