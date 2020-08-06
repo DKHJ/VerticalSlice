@@ -11,21 +11,20 @@
 // Sets default values
 ABaseInteract::ABaseInteract()
 {
-	// Overwrite the default actor root component, with our scene root component
-	_RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
-	RootComponent = _RootComponent;
+	RootScene = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = RootScene;
 
-	// Create a Mesh object and attatch it to the scene component
-	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	// Mesh
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MainMesh"));
 	Mesh->SetupAttachment(RootComponent);
 
-	// Create our Collision Box and attach it to the scene component
-	InteractCollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("InteractCollisionBox"));
-	InteractCollisionBox->SetupAttachment(RootComponent);
+	Collision = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
+	Collision->SetupAttachment(RootComponent);
 
 	// Dynamic events
-	InteractCollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ABaseInteract::BeginOverlap);
-	InteractCollisionBox->OnComponentEndOverlap.AddDynamic(this, &ABaseInteract::EndOverlap);
+	Collision->OnComponentBeginOverlap.AddDynamic(this, &ABaseInteract::BeginOverlap);
+	Collision->OnComponentEndOverlap.AddDynamic(this, &ABaseInteract::EndOverlap);
+
 
 	//Mark the interactive as replicates
 	SetReplicates(true);
@@ -72,34 +71,26 @@ void ABaseInteract::SendSignalToInteractive()
 	UE_LOG(LogTemp, Warning, TEXT("ABasicInteractive::SendSignalToInteractive called"));
 }
 
-/** Overlap Event ( Should ideally only be characters ) */
 void ABaseInteract::BeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("C++ Called ABaseInteract BeginOverlap  Event!"));
-
-	if (CharacterReference != nullptr) return;
+	UE_LOG(LogTemp, Warning, TEXT("ABasicInteractive::Overllaping called"));
+	if (CharacterOverlapping != nullptr) return;
 
 	auto Character = Cast<AVerticalSliceCharacter>(OtherActor);
-	// Check if we're overlapping with a valid character
 	if (Character)
 	{
-		CharacterReference = Character;
+		CharacterOverlapping = Character;
 
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Checking interface!"));
-		IInteractionInterface* Interface = Cast<IInteractionInterface>(CharacterReference);
+		// Detects if  the interface CharacterOverlapping
+		IInteractionInterface* Interface = Cast<IInteractionInterface>(CharacterOverlapping);
+
 		if (Interface)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("true interface!"));
-			CharacterReference->CurrentInteractActorReference = this;
-		}
-		
+			SetOwner(CharacterOverlapping);
 
-		//IInteractionInterface* Interface = Cast<IInteractionInterface>(CharacterReference);
-		//// Check for a valid interface on the character reference
-		//if (Interface)
-		//{
-		//	Interface->DoInteract();
-		//}
+			// Notify the interface with this interactive
+			Interface->NotifyInInteractRange(this);
+		}
 	}
 }
 
@@ -108,19 +99,19 @@ void ABaseInteract::EndOverlap(UPrimitiveComponent * OverlappedComp, AActor * Ot
 	auto Character = Cast<AVerticalSliceCharacter>(OtherActor);
 	if (Character)
 	{
-		if ((CharacterReference != nullptr) && (CharacterReference == Character))
+		if ((CharacterOverlapping != nullptr) && (CharacterOverlapping == Character))
 		{
 			// Release the overlapped character reference
-			CharacterReference = nullptr;
+			CharacterOverlapping = nullptr;
 
-			IInteractionInterface* Interface = Cast<IInteractionInterface>(CharacterReference);
+			IInteractionInterface* Interface = Cast<IInteractionInterface>(CharacterOverlapping);
 
 			if (Interface)
 			{
 				SetOwner(nullptr);
 
-				//// Notifies the interface
-				//Interface->NotifyLeaveInteractRange(this);
+				// Notifies the interface
+				Interface->NotifyLeaveInteractRange(this);
 			}
 		}
 	}

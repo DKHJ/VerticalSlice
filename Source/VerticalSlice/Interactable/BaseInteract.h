@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/SceneComponent.h"
 #include "BaseInteract.generated.h"
 
 UCLASS()
@@ -17,13 +16,15 @@ public:
 	ABaseInteract();
 
 protected:
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interactions", meta = (AllowPrivateAccess = "true"))
-		UStaticMeshComponent* Mesh;
-
 	// Components
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interactions", meta = (AllowPrivateAccess = "true"))
-		class UBoxComponent* InteractCollisionBox;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interactive", meta = (AllowPrivateAccess = "true"))
+		class USceneComponent* RootScene;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interactive", meta = (AllowPrivateAccess = "true"))
+		class UStaticMeshComponent* Mesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interactive", meta = (AllowPrivateAccess = "true"))
+		class UBoxComponent* Collision;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -44,21 +45,12 @@ public:
 
 	virtual void SendSignalToInteractive();
 
-	// Daniel
-	virtual void Interact() PURE_VIRTUAL(AMster_Interactable::Interact, );
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	class AVerticalSliceCharacter* CharacterReference = nullptr;
+	class AVerticalSliceCharacter* CharacterOverlapping = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 		FName ID;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 		FName ConnectedInteractiveID;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		USceneComponent* _RootComponent;
-	
-
 
 };
