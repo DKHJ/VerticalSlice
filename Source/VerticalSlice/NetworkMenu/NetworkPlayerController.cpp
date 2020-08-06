@@ -64,5 +64,5 @@ void ANetworkPlayerController::TravelToSummerLevel(APawn* InstigatorPawn)
 	UWorld* World = GetWorld();
 	if (!ensure(World != nullptr)) return;
 
-	World->ServerTravel("/Game/Levels/WinterRevised?listen");
+	World->ServerTravel("/Game/Levels/SummerRevised?listen");
 }
