@@ -26,6 +26,9 @@ class AVerticalSliceCharacter : public ACharacter, public IInteractionInterface
 public:
 	AVerticalSliceCharacter();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Swimming)
+	bool isSwimming;
+
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
