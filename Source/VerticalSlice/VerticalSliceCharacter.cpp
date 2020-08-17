@@ -151,13 +151,26 @@ void AVerticalSliceCharacter::MoveForward(float Value)
 {
 	if ((Controller != NULL) && (Value != 0.0f))
 	{
-		// find out which way is forward
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
+		if (isSwimming == false)
+		{
+			// find out which way is forward
+			const FRotator Rotation = Controller->GetControlRotation();
+			const FRotator YawRotation(0, Rotation.Yaw, 0);
 
-		// get forward vector
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		AddMovementInput(Direction, Value);
+			// get forward vector
+			const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+			AddMovementInput(Direction, Value);
+		}
+		else if (isSwimming == true)
+		{
+			// find out which way is forward
+			const FRotator Rotation = FollowCamera->GetComponentRotation();
+			const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+			// get forward vector
+			const FVector Direction = FRotationMatrix(Rotation).GetUnitAxis(EAxis::X);
+			AddMovementInput(Direction, Value);
+		}
 	}
 }
 

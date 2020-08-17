@@ -34,6 +34,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Swimming)
+		bool isSwimming;
 
 	void HandleInteractionInput();
 
