@@ -24,13 +24,16 @@ protected:
 
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent() override;
-
+	
 protected:
 
 	class AVerticalSliceCharacter* myCharacter;
 
 
 public:
+
+	virtual void SetCinematicMode(bool bInCinematicMode, bool bHidePlayer, bool bAffectsHUD, bool bAffectsMovement, bool bAffectsTurning) override;
+	
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Player Controller")
 	void OnLevelComplete(APawn* InstigatorPawn);

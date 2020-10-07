@@ -66,3 +66,8 @@ void ANetworkPlayerController::TravelToSummerLevel(APawn* InstigatorPawn)
 
 	World->ServerTravel("/Game/Levels/SummerRevised?listen");
 }
+
+void ANetworkPlayerController::SetCinematicMode(bool bInCinematicMode, bool bHidePlayer, bool bAffectsHUD, bool bAffectsMovement, bool bAffectsTurning)
+{
+	Super::SetCinematicMode(bInCinematicMode, bHidePlayer, bAffectsHUD, bAffectsMovement, bAffectsTurning);
+}
