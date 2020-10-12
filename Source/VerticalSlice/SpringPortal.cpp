@@ -92,7 +92,7 @@ void ASpringPortal::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		{
 			if (ToSpringLevel == true)
 			{
-				//GoToCinematicMode();
+				GoToCinematicMode();
 				GameMode->GoToSpringLevel(Pawn, true);
 			
 			
@@ -101,17 +101,17 @@ void ASpringPortal::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 			
 			else if (ToAutumnLevel == true)
 			{
-				//GoToCinematicMode();
+				GoToCinematicMode();
 				GameMode->GoToAutumnLevel(Pawn, true);
 			}
 			else if (ToSummerLevel == true)
 			{
-				//GoToCinematicMode();
+				GoToCinematicMode();
 				GameMode->GoToSummerLevel(Pawn, true);
 			}
 			else if (ToWinterLevel == true)
 			{
-				//GoToCinematicMode();
+				GoToCinematicMode();
 				GameMode->GoToWinterLevel(Pawn, true);
 			}
 
