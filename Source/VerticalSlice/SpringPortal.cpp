@@ -111,7 +111,7 @@ void ASpringPortal::HandleOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 			}
 			else if (ToWinterLevel == true)
 			{
-			//	GoToCinematicMode();
+				//GoToCinematicMode();
 				GameMode->GoToWinterLevel(Pawn, true);
 			}
 
