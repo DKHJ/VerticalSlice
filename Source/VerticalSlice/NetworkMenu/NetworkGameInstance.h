@@ -71,4 +71,9 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool bIsAutumnCompleted;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool bSeenMainMenu;
+
 };
