@@ -41,10 +41,10 @@ public:
 	void RefreshServerList() override;
 
 	UFUNCTION(BlueprintImplementableEvent)
-		void PreLoadMap();
+		void BeginLoadingScreen();
 
 	UFUNCTION(BlueprintImplementableEvent)
-		void PostLoadMap();
+		void EndLoadingScreen();
 
 private:
 

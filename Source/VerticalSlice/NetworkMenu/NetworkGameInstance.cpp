@@ -7,6 +7,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Blueprint/UserWidget.h"
 
+
 #include "OnlineSessionSettings.h"
 #include "OnlineSubsystemTypes.h"
 
@@ -40,7 +41,9 @@ void UNetworkGameInstance::Init()
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Found no subsystem"));
 	}
+
 }
+
 
 void UNetworkGameInstance::LoadMenuWidget()
 {
