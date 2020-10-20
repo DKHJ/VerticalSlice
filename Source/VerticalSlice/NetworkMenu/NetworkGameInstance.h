@@ -40,6 +40,12 @@ public:
 
 	void RefreshServerList() override;
 
+	UFUNCTION(BlueprintImplementableEvent)
+		void PreLoadMap();
+
+	UFUNCTION(BlueprintImplementableEvent)
+		void PostLoadMap();
+
 private:
 
 	TSubclassOf<class UUserWidget> MenuClass;

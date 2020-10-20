@@ -113,6 +113,8 @@ void UNetworkGameInstance::RefreshServerList()
 	}
 }
 
+
+
 void UNetworkGameInstance::OnCreateSessionComplete(FName SessionName, bool Success)
 {
 	if (!Success)
